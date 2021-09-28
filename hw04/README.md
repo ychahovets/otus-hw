@@ -54,7 +54,7 @@ errors: No known data errors
 NAME      SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  ALTROOT
 bigdata  5.62G    96K  5.62G        -         -     0%     0%  1.00x    ONLINE  -
 ```
-
+###
 Перейдём к созданию файловых систем:
 
 ```
@@ -66,7 +66,7 @@ bigdata  5.62G    96K  5.62G        -         -     0%     0%  1.00x    ONLINE  
 
 ### **Изменение настроек файловых систем**
 
-Доступные значения для установки сжатия данных:
+Посмотрим, что может предложить zfs в плане сжатия man zfs:
 
 compression=on|off|gzip|gzip-N|lz4|lzjb|zle
 
@@ -92,7 +92,7 @@ bigdata/zfs_zle   compression  zle       local
 ```
 
 ### **Проверка эффективности сжатия**
-
+###
 Скачаем текстовый документ на все 4 файловые системы:
 
 ```
@@ -114,7 +114,7 @@ Saving to: 'War_and_Peace.txt'
 
 2021-08-17 09:52:31 (1.66 MB/s) - 'War_and_Peace.txt' saved [3359408/3359408]
 ```
-
+###
 Проверим результат:
 
 ```
@@ -169,8 +169,8 @@ tar -xf zfs_task1.tar.gz
 [vagrant@server ~]$ sudo zpool import -d zpoolexport/ otus
 [vagrant@server ~]$ zpool list
 NAME      SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  ALTROOT
-bigdata  5.62G   301K  5.62G        -         -     0%     0%  1.00x    ONLINE  -
-otus      480M  2.18M   478M        -         -     0%     0%  1.00x    ONLINE  -
+bigdata  5.62G   306K  5.62G        -         -     0%     0%  1.00x    ONLINE  -
+otus      480M  2.21M   478M        -         -     0%     0%  1.00x    ONLINE  -
 ```
 
 В списке доступных пулов появлся импортированный пул otus.
@@ -236,7 +236,7 @@ wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1gH8g
 vagrant@server ~]$ sudo zfs receive otus/storage@task2 < otus_task2.file
 [vagrant@server ~]$ zfs list
 NAME               USED  AVAIL     REFER  MOUNTPOINT
-bigdata            238K  5.45G       28K  /bigdata
+bigdata            241K  5.45G       28K  /bigdata
 bigdata/zfs_gzip    24K  5.45G       24K  /bigdata/zfs_gzip
 bigdata/zfs_lz4     24K  5.45G       24K  /bigdata/zfs_lz4
 bigdata/zfs_lzjb    24K  5.45G       24K  /bigdata/zfs_lzjb
@@ -250,10 +250,11 @@ otus/storage      2.83M   347M     2.83M  /otus/storage
 И содержит сообщение:
 
 ```
+
 [vagrant@server ~]$ cat /otus/storage/task1/file_mess/secret_message 
+
+
+Зашифрованное сообщение от преподавателей:
+
 https://github.com/sindresorhus/awesome
-```
 
-### **Заключение**
-
-В процессе выполнения лабораторной работы были получены навыки работы с файловой системой zfs. Были созданы тома, проверены функции импорта пулов и восстановления из snapshot'ов.
