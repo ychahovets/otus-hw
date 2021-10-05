@@ -1,0 +1,23 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require 'open3'
+require 'fileutils'
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define "hw-06" do |srv|
+    srv.vm.box = 'centos/7.8'
+    srv.vm.box_url = 'http://cloud.centos.org/centos/7/vagrant/x86_64/images/CentOS-7-x86_64-Vagrant-2004_01.VirtualBox.box'
+    srv.vm.host_name = 'hw06'
+    srv.vm.network :private_network, ip: "10.0.0.42"
+    srv.vm.provider :virtualbox do |vb|
+      vb.memory = "1024"
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    srv.vm.provision "shell",
+      name: "Configure script",
+      path: "config.sh"
+    end
+  end
+
+end
