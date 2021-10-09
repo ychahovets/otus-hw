@@ -23,24 +23,24 @@ logout
 ### Если систему перезагрузить принудительно, то изменения не сохранятся.
 
 ### 2: Переименовать volume group cl_centos8
-![](https://github.com/ychahovets/otus-hw/hw07/001.png)
+![](https://github.com/ychahovets/otus-hw/blob/main/hw07/001.png)
 ```
 [root@centos8 ~]# vgrename cl_centos8 otus
 ```
-![](https://github.com/ychahovets/otus-hw/hw07/002.png)
+![](https://github.com/ychahovets/otus-hw/blob/main/hw07/002.png)
 ### Заменить старое название на новое в следующих файлах:
 ```
 [root@centos8 ~]# vi /etc/fstab
 ```
-![](https://github.com/ychahovets/otus-hw/hw07/003.png)
+![](https://github.com/ychahovets/otus-hw/blob/main/hw07/003.png)
 ```
 [root@centos8 ~]# vi /etc/default/grub
 ```
-![](https://github.com/ychahovets/otus-hw/hw07/004.png)
+![](https://github.com/ychahovets/otus-hw/blob/main/hw07/004.png)
 ```
 [root@centos8 ~]# vi /boot/grub2/grub.cfg
 ```
-![](https://github.com/ychahovets/otus-hw/hw07/005.png)
+![](https://github.com/ychahovets/otus-hw/blob/main/hw07/005.png)
 ### Пересоздать initrd image 
 ```
 [root@centos8 ~]# mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
@@ -61,4 +61,4 @@ logout
 [root@centos8 ~]# dracut -f -v
 ```
 ### Если в редакторе grub конфига удалить rghb и quiet в конце строки kernel то при загрузке отобразится пингвин! 
-![](https://github.com/ychahovets/otus-hw/hw07/006.png)
+![](https://github.com/ychahovets/otus-hw/blob/main/hw07/006.png
