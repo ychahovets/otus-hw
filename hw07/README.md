@@ -61,4 +61,4 @@ logout
 [root@centos8 ~]# dracut -f -v
 ```
 ### Если в редакторе grub конфига удалить rghb и quiet в конце строки kernel то при загрузке отобразится пингвин! 
-![](https://github.com/ychahovets/otus-hw/blob/main/hw07/006.png
+![](https://github.com/ychahovets/otus-hw/blob/main/hw07/006.png)
