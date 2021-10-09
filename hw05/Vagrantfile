@@ -7,7 +7,7 @@ require 'fileutils'
 Vagrant.configure("2") do |config|
 
   config.vm.define "client" do |client|
-    client.vm.box = 'centos/8.2'
+    client.vm.box = 'generic/centos8'
     client.vm.host_name = 'client'
     client.vm.network :private_network, ip: "10.0.0.40"
     client.vm.provider :virtualbox do |vb|
