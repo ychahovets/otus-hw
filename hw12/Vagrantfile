@@ -28,9 +28,7 @@ Vagrant.configure("2") do |config|
             sed -i '65s/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
             systemctl restart sshd
           SHELL
-          box.vm.provision "prepare", type: "shell" do |s|
-            s.inline = "yum install -y epel-release python3"
-          end
+          
           box.vm.provision "task-1", type: "shell", path: "./provision/task-01.sh"
           box.vm.provision "task-2", type: "shell", path: "./provision/task-02.sh"
           box.vm.provision "task-3", type: "shell", path: "./provision/task-03.sh"
