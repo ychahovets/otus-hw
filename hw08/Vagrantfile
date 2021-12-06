@@ -1,0 +1,17 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+    config.vm.box = "generic/centos8"
+    config.vm.synced_folder "files", "/vagrant"
+  
+      config.vm.provision "shell", inline: <<-SHELL
+      mkdir -p ~root/.ssh
+      cp ~vagrant/.ssh/auth* ~root/.ssh
+      yum install -y mailx
+      echo "*/1 * * * * /vagrant/script.sh" | crontab
+      chmod +x /vagrant/script.sh
+      
+    SHELL
+  
+  end
+  
