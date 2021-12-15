@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+
+    config.vm.define "web" do |vmconfig| 
+     vmconfig.vm.box = 'centos/7'
+     vmconfig.vm.synced_folder ".", "/vagrant"
+     vmconfig.vm.hostname = 'web'
+     vmconfig.vm.network :private_network, ip: "192.168.56.121"
+     vmconfig.vm.provider "virtualbox" do |vbx|
+      vbx.memory = "1024"
+      vbx.cpus = "1"
+      vbx.customize ["modifyvm", :id, '--audio', 'none']
+     end
+    end
+
+    config.vm.define "log" do |vmconfig|
+     vmconfig.vm.box = 'centos/7'
+     vmconfig.vm.synced_folder ".", "/vagrant"
+     vmconfig.vm.hostname = 'log'
+     vmconfig.vm.network :private_network, ip: "192.168.56.122"
+     vmconfig.vm.provider "virtualbox" do |vbx|
+      vbx.memory = "1024"
+      vbx.cpus = "1"
+      vbx.customize ["modifyvm", :id, '--audio', 'none']
+     end    
+    end
+end
+  

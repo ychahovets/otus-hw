@@ -1,0 +1,52 @@
+---
+# tasks file for rsyslog-client
+- name: Create rsyslog config from template
+  template:
+    src: rsyslog.conf.j2
+    dest: /etc/rsyslog.conf
+    mode: '0644'
+  notify:
+    - restart rsyslog
+  tags:
+    - rsyslog-config
+
+- name: Copy auditd rules file
+  copy:
+    src: audit.rules
+    dest: /etc/audit/rules.d/audit.rules
+    mode: '0600'
+  notify:
+    - restart auditd
+  tags:
+    - auditd-config
+
+
+- name: Create auditd config from template
+  template:
+    src: audisp-remote.conf.j2
+    dest: /etc/audisp/audisp-remote.conf
+    mode: '0640'
+  notify:
+    - restart auditd
+  tags:
+    - auditd-config
+
+- name: Copy auditd config file
+  copy:
+    src: auditd.conf
+    dest: /etc/audit/auditd.conf
+    mode: '0640'
+  notify:
+    - restart auditd
+  tags:
+    - auditd-config
+
+- name: Copy au-remote config file
+  copy:
+    src: au-remote.conf
+    dest: /etc/audisp/plugins.d/au-remote.conf
+    mode: '0640'
+  notify:
+    - restart auditd
+  tags:
+    - auditd-config

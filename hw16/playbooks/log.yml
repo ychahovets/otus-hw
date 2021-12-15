@@ -1,0 +1,7 @@
+---
+   
+- name: Logging server
+  hosts: log
+  become: true
+  roles:
+    - log-server

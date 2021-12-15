@@ -1,0 +1,12 @@
+---
+# defaults file for nginx
+nginx_listen_port: 80
+
+
+nginx_host_packages:
+  - vim
+  - tree
+  - bind-utils
+  - audispd-plugins
+syslog_host: "192.168.56.122"
+syslog_port: 514

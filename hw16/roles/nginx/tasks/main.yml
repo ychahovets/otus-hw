@@ -1,0 +1,36 @@
+---
+# tasks file for nginx
+- name: NGINX | Install EPEL Repo package from standart repo
+  yum:
+    name: epel-release
+    state: present
+ 
+- name: Install packages
+  yum:
+    name: '{{ item }}'
+    state: present
+  loop: '{{ nginx_host_packages }}'
+
+- name: NGINX | Install nginx package from EPEL Repo
+  yum:
+    name: nginx
+    state: latest
+  notify:
+    - restart nginx
+  tags:
+    - nginx-package
+    - packages
+
+#- name:
+#  ansible.posix.selinux:
+#    policy: targeted
+#    state: permissive
+
+- name: NGINX | Create NGINX config from template
+  template:
+    src: ../templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+  notify:
+    - reload nginx
+  tags:
+    - nginx-config

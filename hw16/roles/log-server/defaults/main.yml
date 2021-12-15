@@ -1,0 +1,4 @@
+---
+# defaults file for rsyslog-client
+syslog_host: "192.168.56.122"
+syslog_listen_port: 514

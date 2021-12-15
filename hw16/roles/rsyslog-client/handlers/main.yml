@@ -1,0 +1,9 @@
+---
+# handlers file for rsyslog-client
+- name: restart rsyslog
+  systemd:
+    name: rsyslog
+    state: restarted
+
+- name: restart auditd
+  command: service auditd restart

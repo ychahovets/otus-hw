@@ -1,0 +1,8 @@
+---
+
+- name: Web server
+  hosts: web
+  become: true
+  roles:
+    - nginx
+    - rsyslog-client
