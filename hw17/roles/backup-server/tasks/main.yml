@@ -1,0 +1,64 @@
+---
+# tasks for backup_server
+    - name: SELinux disable
+      selinux:
+        state: disabled
+
+    - name: Install Epel repo
+      yum:
+        name: epel-release
+        state: latest
+
+    - name: Install LVM utils and Borgbackup
+      yum:
+        name: lvm2, device-mapper, borgbackup, vim
+        state: present
+
+    - name: Create VG vg_backup
+      lvg:
+        vg: vg_backup
+        pvs: /dev/sdb
+
+    - name: Create LVM backup
+      lvol:
+        vg: vg_backup
+        lv: backup
+        size: 100%FREE
+        shrink: no
+    
+    - name: Create filesytem on LVM volume
+      filesystem:
+        dev: /dev/vg_backup/backup
+        fstype: ext4
+
+    - name: Mount LVM filesystem
+      mount:
+        path: /var/backup
+        src: /dev/vg_backup/backup
+        fstype: ext4
+        state: mounted
+    
+    - name: User add back_oper
+      ansible.builtin.user:
+        name: back_oper
+        create_home: yes
+
+    - name: Recursively change directory /var/backup/
+      ansible.builtin.file:
+        path: /var/backup
+        state: directory
+        recurse: yes
+        owner: back_oper
+        group: back_oper
+    
+    - name: Create a directory /home/back_oper/.ssh
+      ansible.builtin.file:
+        path: /home/back_oper/.ssh
+        state: directory
+        mode: '0755'
+   
+    - name: Create a new file authorized_keys
+      file:
+        path: /home/back_oper/.ssh/authorized_keys
+        state: touch
+        mode: 0755

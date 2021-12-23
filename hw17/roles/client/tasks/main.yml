@@ -1,0 +1,59 @@
+---
+# tasks for client
+
+    - name: SELinux disable
+      selinux:
+        state: disabled
+
+    - name: Install Epel repo
+      yum:
+        name: epel-release
+        state: latest
+
+    - name: Install Borgbackup
+      yum:
+        name: borgbackup
+        state: latest
+
+    - name: Install vim
+      yum:
+       name: vim
+       state: latest
+
+
+    - name: Change SSH client settings
+      lineinfile:
+         path: '/etc/ssh/ssh_config'
+         regexp: '^StrictHostKeyChecking'
+         line: 'StrictHostKeyChecking no'
+         insertafter: '^# +StrictHostKeyChecking ask'
+
+    - name: Copy Borgbackup script
+      copy:
+        src: '/vagrant/borg-back.sh'
+        dest: '/root/borg-back.sh'
+        remote_src: yes
+        mode: 754
+    
+    - name: Copy backup service files
+      copy:
+        src: '/vagrant/borg-back.service'
+        dest: '/etc/systemd/system/borg-back.service'
+        remote_src: yes
+  
+    - name: Copy backup timer
+      copy:
+        src: '/vagrant/borg-back.timer'
+        dest: '/etc/systemd/system/borg-back.timer'
+        remote_src: yes
+
+    - name: enable borg-back.timer
+      service:
+        name: borg-back.timer
+        enabled: yes
+
+    - name: Start borg-back.timer
+      service: 
+        name: borg-back.timer
+        state: started
+

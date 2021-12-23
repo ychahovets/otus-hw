@@ -1,0 +1,13 @@
+---
+ - name: Deploy backup_server machine
+   hosts: backup-server
+   become: true
+   roles:
+    - backup-server
+
+
+ - name: Deploy client machine
+   hosts: client
+   become: true
+   roles:
+      - client
