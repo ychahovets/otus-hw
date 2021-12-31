@@ -29,13 +29,13 @@ pxe сервер
 Скриншоты процесса
 
 Запрос IP-адреса pxeclient-ом
-![](https://github.com/ychahovets/otus-hw/blob/main/hw18/001.png)
+![](https://github.com/ychahovets/otus-hw/blob/main/hw18/img/001.png)
 
 Выбираем пункт Auto install CentOS-7
-![](https://github.com/ychahovets/otus-hw/blob/main/hw18/002.png)
+![](https://github.com/ychahovets/otus-hw/blob/main/hw18/img/002.png)
 
 Установка CentOS-7 начнется автоматически
-![](https://github.com/ychahovets/otus-hw/blob/main/hw18/003.png)
+![](https://github.com/ychahovets/otus-hw/blob/main/hw18/img/003.png)
 
 Установка CentOS-7 в процессе
-![](https://github.com/ychahovets/otus-hw/blob/main/hw18/004.png)
+![](https://github.com/ychahovets/otus-hw/blob/main/hw18/img/004.png)
